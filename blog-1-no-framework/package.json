@@ -1,0 +1,14 @@
+{
+  "name": "blog-1-no-framework",
+  "version": "1.0.0",
+  "main": "bin/www.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+    "prd": "cross-env NODE_ENV=production nodemon ./bin/www.js "
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.11"
+  }
+}
