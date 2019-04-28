@@ -3,9 +3,11 @@ const env = process.env.NODE_ENV;
 
 // 配置
 let MYSQL_CONFIG;
+let REDIS_CONFIG;
 
-// 开发环境，本地db
+// 开发环境
 if (env === 'dev') {
+    // MySQL
     MYSQL_CONFIG = {
         host: 'localhost',
         user: 'root',
@@ -13,19 +15,33 @@ if (env === 'dev') {
         port: '3306',
         database: 'myblog'
     };
+
+    // Redis
+    REDIS_CONFIG = {
+        port: 6379,
+        host: '127.0.0.1'
+    };
 };
 
+// 生产环境，先用本地代替
 if (env === 'production') {
-    // 线上服务器地址，先用本地代替
+    // MySQL
     MYSQL_CONFIG = {
         host: 'localhost',
         user: 'root',
         password: '123456',
         port: '3306',
-        database: 'myblog' 
+        database: 'myblog'
+    };
+
+    // Redis
+    REDIS_CONFIG = {
+        port: 6379,
+        host: '127.0.0.1'
     };
 };
 
 module.exports = {
-    MYSQL_CONFIG
+    MYSQL_CONFIG,
+    REDIS_CONFIG
 };
