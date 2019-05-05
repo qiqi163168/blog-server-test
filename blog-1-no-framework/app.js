@@ -2,6 +2,7 @@ const queryString = require('querystring');
 const handleBlogRouter = require('./src/router/blog.js');
 const handleUserRouter = require('./src/router/user.js');
 const { setRedis, getRedis } = require('./src/db/redis.js');
+const { writeAccessLog } = require('./src/utils/log.js');
 
 // 获取cookie过期时间
 const getCookieExpires = () => {
@@ -50,6 +51,9 @@ const getPostData = (req) => {
 // 路由命中
 // 所有的http请求都会经过serverHandle
 const serverHandle = (req,res) => {
+  // 记录access log
+  writeAccessLog(`${req.method} -- ${req.url} -- ${req.headers['user-agent']} -- ${Date.now()}`);
+
   // 设置返回格式 - JSON
   res.setHeader('Content-type', 'application/json');
 
