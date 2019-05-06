@@ -1,3 +1,4 @@
+const xss = require('xss');
 const { sqlExec } = require('../db/mysql.js');
 
 const getBlogList = (author, keyword) => {
@@ -35,8 +36,8 @@ const getBlogDetail = (id) => {
 const newBlog = (blogData = {}) => {
     // blogData是一个博客对象，包含title content author属性
     // console.log('newBlog blogData...', blogData);
-    const title = blogData.title;
-    const content = blogData.content;
+    const title = xss(blogData.title);
+    const content = xss(blogData.content);
     const author = blogData.author;
     const createTime = Date.now();
 
